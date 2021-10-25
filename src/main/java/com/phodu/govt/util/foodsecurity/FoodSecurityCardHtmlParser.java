@@ -50,6 +50,7 @@ public class FoodSecurityCardHtmlParser {
 		boolean familyEndFound = false;
 		int familySize = 0;
 		String headOfFamily = null, address = null, uid = null, fatherName = null;
+		List<FoodSecurityCardMember> members = new ArrayList<FoodSecurityCardMember> ();
 
 		for (int i = 0; i < size; i++) {
 			Element element = foodSecurityCardDetailItems.get(i);
@@ -80,10 +81,15 @@ public class FoodSecurityCardHtmlParser {
 			} else if (familyStartFound && !familyEndFound && text.startsWith(FAMILY_END)) {
 				familyEndFound = true;
 			} else if (familyStartFound && !familyEndFound) {
+				FoodSecurityCardMember member = FoodSecurityCardMember.buildFromText(text);
+				members.add(member);
 				familySize++;
 			}
 		}
 		FoodSecurityCard foodSecurityCard = new FoodSecurityCard(headOfFamily, fatherName, uid, address, familySize);
+		for (FoodSecurityCardMember member : members) {
+			foodSecurityCard.getFamilyMembers().add(member);
+		}
 		return foodSecurityCard;
 	}
 

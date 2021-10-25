@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodSecurityCard {
+	public String toString() {
+		return headOfHouseHold;
+	}
+
 	private List<FoodSecurityCardMember> familyMembers = new ArrayList<FoodSecurityCardMember>(4);
 	private String cardNumber;
 	private String cardType;

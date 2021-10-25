@@ -21,25 +21,36 @@ public class FoodSecurityCardExcelWriter {
 		sheet = workbook.createSheet("Venkat Rao Best");
 	}
 
-	public void write(FoodSecurityCard foodSecurityCards) {
+	public void write(FoodSecurityCard foodSecurityCard) {
 		Row row = sheet.createRow(rowCount++);
 
 		int colNum = 0;
 
 		Cell cell = row.createCell(colNum++);
-		cell.setCellValue(foodSecurityCards.getHeadOfHouseHold());
+		cell.setCellValue(foodSecurityCard.getHeadOfHouseHold());
 
 		cell = row.createCell(colNum++);
-		cell.setCellValue(foodSecurityCards.getFatherHusbandName());
+		cell.setCellValue(foodSecurityCard.getFatherHusbandName());
 
 		cell = row.createCell(colNum++);
-		cell.setCellValue(foodSecurityCards.getUid());
+		cell.setCellValue(foodSecurityCard.getUid());
 
 		cell = row.createCell(colNum++);
-		cell.setCellValue(foodSecurityCards.getFamilySize());
+		cell.setCellValue(foodSecurityCard.getFamilySize());
 
 		cell = row.createCell(colNum++);
-		cell.setCellValue(foodSecurityCards.getAddress());
+		cell.setCellValue(foodSecurityCard.getAddress());
+
+		for (FoodSecurityCardMember member : foodSecurityCard.getFamilyMembers()) {
+			cell = row.createCell(colNum++);
+			cell.setCellValue(member.getName());
+			
+			cell = row.createCell(colNum++);
+			cell.setCellValue(member.getDob());
+			
+			cell = row.createCell(colNum++);
+			cell.setCellValue(member.getUid());
+		}
 	}
 
 	public void close() {
